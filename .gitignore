@@ -1,0 +1,10 @@
+.specstory
+.vscode
+.env
+.vscode
+archive*/**
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+tests/browser-fixture/
