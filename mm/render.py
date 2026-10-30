@@ -70,6 +70,8 @@ PAGE = """<!DOCTYPE html>
     <div id="transcript"></div>
   </main>
 </div>
+<script src="commonmark.js"></script>
+<script src="markdown.js"></script>
 <script>
 window.MM = Object.assign({chats: {}, search: null}, /*__BOOT__*/);
 </script>
@@ -104,6 +106,9 @@ def render_viewer(out: Path, config: Config) -> Path:
     out.mkdir(parents=True, exist_ok=True)
     for name in FAVICONS:
         shutil.copyfile(VIEWER / "favicon" / name, out / name)
+    shutil.copyfile(VIEWER / "vendor" / "commonmark.js", out / "commonmark.js")
+    shutil.copyfile(VIEWER / "vendor" / "LICENSE.commonmark.txt", out / "LICENSE.commonmark.txt")
+    shutil.copyfile(VIEWER / "markdown.js", out / "markdown.js")
     css = (VIEWER / "viewer.css").read_text(encoding="utf-8")
     # Only a literal </script> can close the inline tag. Escaping every "</"
     # also rewrites the regex /</g inside escapeHtml and the page dies on load.

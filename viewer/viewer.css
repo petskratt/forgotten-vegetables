@@ -396,6 +396,7 @@ a.when:hover { color: var(--link-color); text-decoration: underline; }
 }
 
 .text p { margin: 0; }
+.text p + p { margin-top: 8px; }
 .text blockquote {
   margin: 4px 0;
   padding-left: 10px;
@@ -414,7 +415,27 @@ a.when:hover { color: var(--link-color); text-decoration: underline; }
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   font-size: 0.92em;
 }
+.text pre code { font-size: 13px; }
 .text a { color: var(--link-color); }
+.text ul, .text ol { margin: 4px 0; padding-left: 1.4em; }
+.text h1, .text h2, .text h3, .text h4, .text h5, .text h6 { margin: 8px 0 4px; line-height: 1.3; }
+.text h1 { font-size: 18px; }
+.text h2 { font-size: 16px; }
+.text h3, .text h4, .text h5, .text h6 { font-size: 15px; }
+.text table {
+  border-collapse: collapse;
+  margin: 6px 0;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.text th, .text td {
+  border: 1px solid var(--center-channel-color-16);
+  padding: 4px 8px;
+  vertical-align: top;
+}
+.text th { background: var(--center-channel-color-04); font-weight: 600; text-align: left; }
+.text img { max-width: min(480px, 100%); border-radius: 4px; }
 
 .post.system .text { color: var(--center-channel-color-64); }
 

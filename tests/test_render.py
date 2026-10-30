@@ -96,6 +96,10 @@ def test_viewer_inlines_assets_and_indexes_filenames(tmp_path):
     assert (out / "favicon-32x32.png").read_bytes() == FAVICON.read_bytes()
     assert 'id="jump-start"' in html and 'id="jump-end"' in html
     assert '"openAt":"end"' in html
+    assert 'src="commonmark.js"' in html and 'src="markdown.js"' in html
+    assert (out / "commonmark.js").stat().st_size > 100_000
+    assert (out / "markdown.js").is_file()
+    assert (out / "LICENSE.commonmark.txt").is_file()
 
     chat_js = (out / "chats" / f"{town}.js").read_text(encoding="utf-8")
     assert chat_js.startswith("window.MM_LOAD(")

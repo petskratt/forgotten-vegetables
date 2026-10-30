@@ -752,32 +752,11 @@
   }
 
   function renderMarkdown(source) {
-    const fences = [];
-    let text = String(source || "").replace(/```[^\n`]*\n([\s\S]*?)```/g, (_, code) => {
-      fences.push("<pre><code>" + escapeHtml(code.replace(/\n$/, "")) + "</code></pre>");
-      return "\u0000F" + (fences.length - 1) + "F\u0000";
-    });
-    text = escapeHtml(text);
-    text = text.replace(/`([^`\n]+)`/g, (_, code) => "<code>" + code + "</code>");
-    text = text.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, url) => {
-      const safe = safeUrl(unescapeHtml(url));
-      if (!safe) return label;
-      return '<a href="' + escapeHtml(safe) + '" rel="noreferrer">' + label + "</a>";
-    });
-    text = text.replace(/(https?:\/\/[^\s<]+)/g, (url) => {
-      const trimmed = url.replace(/[),.;]+$/, "");
-      const suffix = url.slice(trimmed.length);
-      return '<a href="' + trimmed + '" rel="noreferrer">' + trimmed + "</a>" + suffix;
-    });
-    text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-    text = text.replace(/(^|[\s>])\*([^*\n]+)\*/g, "$1<em>$2</em>");
-    text = text
-      .split("\n")
-      .map((line) => (line.indexOf("&gt; ") === 0 ? "<blockquote>" + line.slice(5) + "</blockquote>" : line))
-      .join("\n");
-    text = text.replace(/\n/g, "<br>\n");
-    text = text.replace(/\u0000F(\d+)F\u0000/g, (_, index) => fences[Number(index)]);
-    return text;
+    const text = String(source || "");
+    if (!window.commonmark || !window.MMMarkdown) {
+      return escapeHtml(text).replace(/\n/g, "<br>\n");
+    }
+    return MMMarkdown.render(window.commonmark, text, safeUrl);
   }
 
   function safeUrl(url) {
@@ -786,14 +765,6 @@
     if (/^media\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+\/[^/\s]+$/.test(value)) return value;
     if (/^media\/[A-Za-z0-9_-]+\/[^/\s]+$/.test(value)) return value;
     return "";
-  }
-
-  function unescapeHtml(value) {
-    return String(value)
-      .replace(/&amp;/g, "&")
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">")
-      .replace(/&quot;/g, '"');
   }
 
   function safeColor(value) {

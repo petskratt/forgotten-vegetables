@@ -3,7 +3,7 @@
 Archive your Mattermost chats, private messages, and attachments to a folder, then open `archive/index.html` in a browser. No web server.
 
 ---
-* Comfort food for when techies have decided your Mattermost is out of fashion, but the users still have their work history in it.
+`*` Comfort food for when techies have decided your Mattermost is out of fashion, but the users still have their work history in it.
 
 ## Setup
 
@@ -49,4 +49,4 @@ A rate limit, auth failure, server error, or network error stops the run immedia
 
 Search has two scopes and one text box. **This chat** highlights matches in the open conversation, including attachment filenames. **Everything** searches every saved chat and filename. Previous and next step through the matches. There are no from, in, or date operators.
 
-The page loads each chat with a normal script tag, because a `file://` page cannot fetch JSON. The tab icon is the Mattermost mark, written next to `index.html`. Keep `index.html`, the favicon pngs, `chats/`, `search.js`, and `media/` together.
+The page loads each chat with a normal script tag, because a `file://` page cannot fetch JSON. Message text uses Mattermost's CommonMark (tables, lists, emphasis, links). The tab icon is the Mattermost mark. Keep `index.html`, `commonmark.js`, `markdown.js`, the favicon pngs, `chats/`, `search.js`, and `media/` together.

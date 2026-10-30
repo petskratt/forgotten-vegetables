@@ -11,6 +11,7 @@
 - `./archive.py` is the command. If the virtualenv, packages, or `.env` are missing, it prints the setup commands that are still left.
 - The viewer tab uses the Mattermost icon. `title` in `channels.yaml` sets the tab text (default `MM Archive`).
 - Chats open at the end unless `open_at` is `start`. Start and End jump there, and switching chats keeps the place you had scrolled to. A message time is a link to `#channel/post`, with the full timestamp on hover.
+- Message text is rendered with Mattermost's CommonMark instead of a handful of regular expressions. Tables render, and an unclosed `*` or `**` no longer paints the rest of the chat.
 
 ## 0.1.0 - 2026-10-28
 
